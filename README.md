@@ -31,6 +31,7 @@ Install the project dependencies by running:
 npm install
 ```
 
+<<<<<<< HEAD
 ### 4. Seed Database
 
 Seed the product table with random data using:
@@ -39,6 +40,9 @@ npx mikro-orm seeder:run
 ```
 
 ### 5. Run the Development Server
+=======
+### 4. Run the Development Server
+>>>>>>> 2967c23505fbf357ec8b1640315a780f7083d07a
 
 Start the Next.js development server with:
 
