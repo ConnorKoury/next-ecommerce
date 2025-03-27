@@ -1,5 +1,5 @@
 import { getORM } from '@/database/orm'; 
-import { Product } from '@/database/module/product.entity';
+import Product from '@/database/module/product.entity';
 import ProductCard from '@/components/productCard';
 import { Image } from '@heroui/image';
 
@@ -21,7 +21,7 @@ export default async function Page() {
         {/* Product Grid */}
         <div className="grid grid-cols-3 gap-4">
           {products.map((p) => (
-            <ProductCard key={p.id} description={p.description} imgUrl={p.imageUrl} price={p.price}/>
+            <ProductCard key={p.id} id={p.id} description={p.description} imgUrl={p.imageUrl} price={p.price}/>
           ))}
         </div>
       </div>

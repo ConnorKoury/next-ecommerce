@@ -1,16 +1,16 @@
-import { Entity, FloatType, IntegerType, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
-import { Product } from './product.entity';
+import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import Product from './product.entity';
 
 @Entity()
-export class Cart {
+export default class Cart {
 
-   @PrimaryKey()
+   @PrimaryKey({ type: 'number' })
    id!: number;
 
    @ManyToOne()
    product!: Product;
 
-   @Property()
+   @Property({ type: 'number' })
    quantity!: number;
 
 }
