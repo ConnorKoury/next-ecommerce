@@ -2,6 +2,7 @@
 import "@/styles/globals.css";
 import { Button } from "@heroui/button";
 import { useState, useEffect } from "react";
+import { useCart } from "@/app/cartContext";
 
 interface AddToCartButtonProps {
   productID: number;
@@ -9,6 +10,7 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ productID }: AddToCartButtonProps) {
   const [quantity, setQuantity] = useState<number>(0);
+  const { cartCount, setCartCount } = useCart();
 
   // Fetch initial cart quantity when component mounts or product changes
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function AddToCartButton({ productID }: AddToCartButtonProps) {
         body: JSON.stringify({ productId: productID, quantity: 1 }),
       });
       const data = await res.json();
+      setCartCount(cartCount + 1);
       setQuantity(data.quantity);
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -50,6 +53,7 @@ export default function AddToCartButton({ productID }: AddToCartButtonProps) {
       const data = await res.json();
       // If the API removes the item when quantity <= 0, we set to 0.
       setQuantity(data.quantity ?? 0);
+      setCartCount(cartCount + direction);
     } catch (error) {
       console.error("Error updating cart:", error);
     }

@@ -1,11 +1,11 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { CartProvider } from "./cartContext";
 
 export const metadata: Metadata = {
   title: {
@@ -40,10 +40,12 @@ export default function RootLayout({
         )}
       >
         <div className="relative flex flex-col h-screen">
-            <Navbar/>
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-              {children}
-            </main>
+            <CartProvider>
+              <Navbar/>
+              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+                {children}
+              </main>
+            </CartProvider>
           </div>
       </body>
     </html>

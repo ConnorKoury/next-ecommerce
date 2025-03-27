@@ -7,17 +7,24 @@ import Cart from '@/database/module/cart.entity';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const productId = searchParams.get('productId');
-  if (!productId) {
-    return NextResponse.json({ error: 'Missing productId' }, { status: 400 });
-  }
 
   const orm = await getORM();
   const em = orm.em.fork();
 
-  // Find cart item for this product
-  const cartItem = await em.findOne(Cart, { product: parseInt(productId) });
-  // Return quantity if found or 0
-  return NextResponse.json({ quantity: cartItem ? cartItem.quantity : 0 });
+  if (productId) {
+    // Find the cart item for this product
+    const cartItem = await em.findOne(Cart, { product: parseInt(productId, 10) });
+    // Return the quantity if found or 0
+    return NextResponse.json({ quantity: cartItem ? cartItem.quantity : 0 });
+  } else {
+    // Return cart quantity count total
+    const carts = await em.find(Cart, {});
+    let total = 0;
+    for(let cart of carts){
+      total += cart.quantity;
+    }
+    return NextResponse.json(total);
+  }
 }
 
 // Create a new cart item if it doesn't exist or add quantity if it does
