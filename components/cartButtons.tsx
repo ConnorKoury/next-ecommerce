@@ -7,7 +7,7 @@ export default function CartButtons(){
     return(
         <div>
             <Button
-                className="text-tiny text-white bg-black/20"
+                className="font-bold bg-black/20"
                 color="default"
                 radius="lg"
                 size="sm"
