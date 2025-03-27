@@ -1,16 +1,16 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
+import { getORM } from '@/database/orm'; 
+import { Product } from '@/database/module/product.entity';
+import ProductCard from '@/components/productCard';
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-
-export default function Home() {
+export default async function Page() {
+  const orm = await getORM();
+  const em = orm.em.fork();
+  const products = await em.find(Product, {});
   return (
     <div>
-      
+      {products.map((p) => (
+        <ProductCard key={p.id} description={p.description} imgUrl={p.imageUrl}/>
+      ))}
     </div>
   );
 }
