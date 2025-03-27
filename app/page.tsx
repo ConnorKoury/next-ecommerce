@@ -1,6 +1,6 @@
 import { getORM } from '@/database/orm'; 
 import Product from '@/database/module/product.entity';
-import ProductCard from '@/components/productCard';
+import ProductGrid from '@/components/productGrid';
 import { Image } from '@heroui/image';
 
 export default async function Page() {
@@ -17,13 +17,7 @@ export default async function Page() {
           height={300}
           src={products[0].imageUrl}
         />
-
-        {/* Product Grid */}
-        <div className="grid grid-cols-3 gap-4">
-          {products.map((p) => (
-            <ProductCard key={p.id} id={p.id} description={p.description} imgUrl={p.imageUrl} price={p.price}/>
-          ))}
-        </div>
+        <ProductGrid/>
       </div>
     </div>
   );

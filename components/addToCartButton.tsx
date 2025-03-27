@@ -74,7 +74,7 @@ export default function AddToCartButton({ productID }: AddToCartButtonProps) {
     );
   } else {
     return (
-      <div className="grid grid-cols-[auto,40px,auto] items-center gap-2">
+      <div className="flex items-center space-x-2">
         <Button
           className="w-10 h-10 font-bold bg-black/20"
           color="default"
