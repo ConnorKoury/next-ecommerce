@@ -7,7 +7,7 @@ export default class Cart {
    @PrimaryKey({ type: 'number' })
    id!: number;
 
-   @ManyToOne()
+   @ManyToOne({ type: 'Product' })
    product!: Product;
 
    @Property({ type: 'number' })
